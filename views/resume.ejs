@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resume Builder</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- SortableJS & html2pdf -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="resume.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="brand">
+        <h1>Resume Builder</h1>
+        <small>Pro — Offline • Auto-save</small>
+      </div>
+
+      <div class="top-controls">
+        <select id="templateSelect" title="Template">
+          <option value="template-modern">Modern</option>
+          <option value="template-minimal">Minimal</option>
+          <option value="template-classic">Classic</option>
+        </select>
+
+        <input id="accentColor" type="color" title="Accent" value="#0b84ff">
+        <select id="fontSelect" title="Font">
+          <option value="Poppins, sans-serif">Poppins</option>
+          <option value="Inter, sans-serif">Inter</option>
+          <option value="Georgia, serif">Georgia</option>
+        </select>
+         <button id="themeToggle" class="icon-btn" title="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+         <button id="editModeBtn" class="small">Edit Mode</button> <!-- 🔹 Added Edit Mode Button -->
+         <button id="importJSON" class="small">Import</button>
+         <button id="exportJSON" class="small">Export</button>
+         <button id="exportPDF" class="primary"><i class="fa-solid fa-file-pdf"></i> PDF</button>
+         <button id="downloadHTML" class="small">HTML</button>
+      </div>
+    </header>
+
+    <!-- Main grid -->
+    <main class="main-grid">
+
+      <!-- Left: Form Controls -->
+      <section class="panel form-panel">
+        <h2>Basic</h2>
+        <label>Full name</label>
+        <input id="nameInput" placeholder="Your name">
+
+        <label>Title / Role</label>
+        <input id="titleInput" placeholder="Frontend Developer">
+
+        <label>Profile photo</label>
+        <input id="photoInput" type="file" accept="image/*">
+        <div class="thumb"><img id="photoPreview" alt="preview"></div>
+
+        <label>Email</label><input id="emailInput" placeholder="you@example.com">
+        <label>Phone</label><input id="phoneInput" placeholder="+91 1234567890">
+        <label>Location</label><input id="locationInput" placeholder="City, Country">
+
+        <hr>
+        <h3>Summary</h3>
+        <textarea id="aboutInput" rows="3" placeholder="Short summary..."></textarea>
+
+        <hr>
+        <h3>Work Experience <small>(Add multiple)</small></h3>
+        <input id="workTitle" placeholder="Job title">
+        <input id="workCompany" placeholder="Company">
+        <input id="workPeriod" placeholder="2019 - 2022">
+        <input id="workLocation" placeholder="City">
+        <textarea id="workDesc" rows="2" placeholder="Achievements / responsibilities"></textarea>
+        <button id="addWork" class="small-btn">Add Work</button>
+        <div id="worksControl"></div>
+
+        <hr>
+        <h3>Education</h3>
+        <input id="eduDegree" placeholder="Degree (B.Tech)">
+        <input id="eduInst" placeholder="Institution">
+        <input id="eduPeriod" placeholder="2015 - 2019">
+        <input id="eduLocation" placeholder="City">
+        <textarea id="eduDesc" rows="2" placeholder="Achievements / notes"></textarea>
+        <button id="addEdu" class="small-btn">Add Education</button>
+        <div id="eduControl"></div>
+
+        <hr>
+        <h3>Projects</h3>
+        <input id="projTitle" placeholder="Project title">
+        <input id="projLink" placeholder="URL (optional)">
+        <input id="projScreenshot" type="file" accept="image/*">
+        <button id="addProject" class="small-btn">Add Project</button>
+        <div id="projectsControl"></div>
+
+        <hr>
+        <h3>Skills</h3>
+        <input id="skillsInput" placeholder="Type skill and Enter">
+        <div id="skillSuggestions" class="suggestions"></div>
+        <div id="skillsList" class="chips"></div>
+
+        <hr>
+        <h3>Certifications</h3>
+        <input id="certTitle" placeholder="Certification title">
+        <input id="certOrg" placeholder="Organization">
+        <button id="addCert" class="small-btn">Add Cert</button>
+        <div id="certControl"></div>
+
+        <hr>
+        <h3>Languages & Hobbies</h3>
+        <input id="langInput" placeholder="Language (e.g., English - Fluent)">
+        <button id="addLang" class="small-btn">Add</button>
+        <div id="langControl"></div>
+
+        <input id="hobbyInput" placeholder="Hobby (e.g., Music)">
+        <button id="addHobby" class="small-btn">Add</button>
+        <div id="hobbyControl"></div>
+
+        <hr>
+        <h3>Sections</h3>
+        <label><input type="checkbox" class="sectionToggle" data-section="about" checked> About</label>
+        <label><input type="checkbox" class="sectionToggle" data-section="experience" checked> Experience</label>
+        <label><input type="checkbox" class="sectionToggle" data-section="education" checked> Education</label>
+        <label><input type="checkbox" class="sectionToggle" data-section="projects" checked> Projects</label>
+        <label><input type="checkbox" class="sectionToggle" data-section="skills" checked> Skills</label>
+        <label><input type="checkbox" class="sectionToggle" data-section="certs" checked> Certifications</label>
+        <label><input type="checkbox" class="sectionToggle" data-section="langs" checked> Languages</label>
+
+        <div class="muted">Auto-saves to browser. Use Export to backup.</div>
+      </section>
+
+      <!-- Right: Live Preview -->
+      <section class="panel preview-panel">
+        <div id="resume" class="resume template-modern" style="--accent:#0b84ff; font-family:Poppins, sans-serif;">
+          <div class="resume-left">
+            <div class="header">
+              <div>
+                <h1 id="previewName">Your Name</h1>
+                <div id="previewTitle" class="title">Your Role</div>
+              </div>
+              <div class="avatar"><img id="previewPhoto" src="" alt=""></div>
+            </div>
+
+            <div id="contactPreview" class="contact">
+              <div id="previewEmail">you@example.com</div>
+              <div id="previewPhone">+91 1234567890</div>
+              <div id="previewLocation">City, Country</div>
+            </div>
+
+            <div id="leftSections" class="sections sortable-left">
+              <section class="section about" data-section="about">
+                <h4>SUMMARY</h4>
+                <p id="previewAbout">Short summary...</p>
+              </section>
+
+              <section class="section experience" data-section="experience">
+                <h4>EXPERIENCE</h4>
+                <div id="previewWorks"></div>
+              </section>
+
+              <section class="section education" data-section="education">
+                <h4>EDUCATION</h4>
+                <div id="previewEdu"></div>
+              </section>
+            </div>
+
+            <footer class="small muted">Built with HTML · CSS · JS</footer>
+          </div>
+
+          <div class="resume-right">
+            <div id="rightSections" class="sections sortable-right">
+              <section class="section projects" data-section="projects">
+                <h4>PROJECTS</h4>
+                <div id="previewProjects"></div>
+              </section>
+
+              <section class="section skills" data-section="skills">
+                <h4>SKILLS</h4>
+                <div id="previewSkills" class="skill-chips"></div>
+              </section>
+
+              <section class="section certs" data-section="certs">
+                <h4>CERTIFICATIONS</h4>
+                <div id="previewCerts"></div>
+              </section>
+
+              <!-- <section class="section langs" data-section="langs">
+                <h4>LANGUAGES & HOBBIES</h4>
+                <div id="previewLangs"></div>
+                <div id="previewHobbies" style="margin-top:8px"></div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section> -->
+    </main>
+
+    <footer class="footer muted">Resume Builder — Offline • Autosaved</footer>
+  </div>
+
+  <input id="importFile" type="file" accept="application/json" style="display:none">
+
+  <script src="/js/resume.js"></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust - Your Travel Companion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Wanderlust.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Wander<span>lust</span></a>
+                <ul class="nav-links">
+                    <li><a href="#Home">Home</a></li>
+                    <li><a href="#Destinations">Destinations</a></li>
+                    <li><a href="#Tours">Tours</a></li>
+                    <li><a href="#About">About</a></li>
+                    <li><a href="#Contact">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+
+            <div class="hero" >
+                <h1>Discover Your Next Adventure</h1>
+                <p>Explore the world's most breathtaking destinations with our expertly crafted travel experiences.</p>
+                <a href="#" class="btn">Explore Tours</a>
+                <a href="#" class="btn btn-accent">Special Offers</a>
+
+                <form class="search-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="destination">Destination</label>
+                            <input type="text" id="destination" placeholder="Where to?">
+                        </div>
+                        <div class="form-group">
+                            <label for="travel-date">Travel Date</label>
+                            <input type="date" id="travel-date">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="travelers">Travelers</label>
+                            <select id="travelers">
+                                <option value="1">1 Traveler</option>
+                                <option value="2">2 Travelers</option>
+                                <option value="3">3 Travelers</option>
+                                <option value="4">4 Travelers</option>
+                                <option value="5+">5+ Travelers</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Budget</label>
+                            <select id="budget">
+                                <option value="economy">Economy</option>
+                                <option value="standard">Standard</option>
+                                <option value="luxury">Luxury</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Search Tours</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features -->
+    <section class="features" href=>
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Us</h2>
+                <p>We provide the best travel experiences with our unique features and excellent service.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Worldwide Tours</h3>
+                    <p>Explore destinations across all continents with our carefully curated tour packages.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <h3>Luxury Stays</h3>
+                    <p>Enjoy premium accommodations at the best hotels and resorts worldwide.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Local Cuisine</h3>
+                    <p>Experience authentic local flavors with our food tours and dining recommendations.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Our travel experts are available round the clock to assist you during your trip.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations -->
+    <section class="destinations" id="description">
+        <div class="container">
+            <div class="section-title">
+                <h2>Popular Destinations</h2>
+                <p>Discover our most sought-after travel destinations loved by travelers worldwide.</p>
+            </div>
+
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <div class="destination-img">
+                        <img src="https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Bali, Indonesia">
+                    </div>
+                    <div class="destination-info">
+                        <h3>Bali, Indonesia</h3>
+                        <p>Explore the island of gods with its beautiful beaches and rich culture.</p>
+                        <div class="destination-price">From $899</div>
+                        <a href="#" class="btn">View Tour</a>
+                    </div>
+                </div>
+
+                <div class="destination-card">
+                    <div class="destination-img">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Santorini, Greece">
+                    </div>
+                    <div class="destination-info">
+                        <h3>Santorini, Greece</h3>
+                        <p>Experience the iconic white-washed buildings and stunning sunsets.</p>
+                        <div class="destination-price">From $1299</div>
+                        <a href="#" class="btn">View Tour</a>
+                    </div>
+                </div>
+
+                <div class="destination-card">
+                    <div class="destination-img">
+                    <img src="/image/26.avif" alt="Japan">
+                    </div>
+                    <div class="destination-info">
+                        <h3>Japan</h3>
+                        <p>Discover ancient temples, beautiful gardens, and traditional culture.</p>
+                        <div class="destination-price">From $1499</div>
+                        <a href="#" class="btn">View Tour</a>
+                    </div>
+                </div>
+
+                <div class="destination-card">
+                    <div class="destination-img">
+                        <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Paris, France">
+                    </div>
+                    <div class="destination-info">
+                        <h3>Paris, France</h3>
+                        <p>The city of love with iconic landmarks and world-class cuisine.</p>
+                        <div class="destination-price">From $1099</div>
+                        <a href="#" class="btn">View Tour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="tours">
+        <div class="container">
+            <div class="section-title">
+                <h2>Traveler Stories</h2>
+                <p>Hear what our customers have to say about their experiences with us.</p>
+            </div>
+
+            <div class="testimonials-slider">
+                <div class="testimonial active">
+                    <p class="testimonial-text">"The tour to Bali was absolutely amazing! Everything was perfectly organized, and we got to experience the local culture in a way we never could have on our own."</p>
+                    <p class="testimonial-author">- Sarah Johnson</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"Our family vacation to Japan was unforgettable. The guides were knowledgeable, and the itinerary was perfectly balanced between activities and free time."</p>
+                    <p class="testimonial-author">- Michael Chen</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">"The luxury tour of Santorini exceeded all our expectations. The hotels were stunning, and the private tours made us feel like VIPs. Worth every penny!"</p>
+                    <p class="testimonial-author">- Emily Rodriguez</p>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+                <div class="slider-controls">
+                    <div class="slider-dot active" data-index="0"></div>
+                    <div class="slider-dot" data-index="1"></div>
+                    <div class="slider-dot" data-index="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="About">
+        <div class="container">
+            <h2>Join Our Travel Community</h2>
+            <p>Subscribe to our newsletter for exclusive travel deals, tips, and inspiration delivered straight to your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="Contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Wanderlust</h3>
+                    <p>Making travel dreams come true since 2010. We specialize in creating unforgettable experiences around the globe.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Destinations</a></li>
+                        <li><a href="#">Tours</a></li>
+                        <li><a href="#">Special Offers</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Booking Guide</a></li>
+                        <li><a href="#">Cancellation Policy</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Travel St, Wander City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@wanderlust.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Wanderlust Travel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/Wanderlust.js"></script>
+</body>
+</html>

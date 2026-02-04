@@ -1,0 +1,153 @@
+:root {
+  --bg-color: linear-gradient(135deg, rgb(43, 45, 66), rgb(43, 45, 66));
+  --text-color: rgb(237, 242, 244);
+  --glass: rgba(255, 255, 255, 0.05);
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  --border: rgba(255, 255, 255, 0.1);
+
+  --gray-light: rgb(141, 153, 174);
+  --gray-very-light: rgb(237, 242, 244);
+  --red-soft: rgb(239, 35, 60);
+  --red-deep: rgb(217, 4, 41);
+}
+
+/* ================= Base Layout ================= */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.5s ease;
+  overflow-x: hidden;
+}
+
+.container {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  border-radius: 25px;
+  padding: 45px 70px;
+  text-align: center;
+  transition: all 0.4s ease;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* ================= Display ================= */
+#display {
+  font-size: 80px;
+  letter-spacing: 3px;
+  margin-bottom: 35px;
+  color: var(--gray-very-light);
+  text-shadow: 0 0 6px var(--gray-light), 0 0 12px var(--gray-light);
+  animation: balancedGlow 2s ease-in-out infinite alternate;
+  word-wrap: break-word;
+}
+
+@keyframes balancedGlow {
+  from {
+    text-shadow: 0 0 4px var(--gray-light);
+  }
+  to {
+    text-shadow: 0 0 10px var(--gray-light), 0 0 18px var(--gray-light);
+  }
+}
+
+/* ================= Buttons ================= */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+button {
+  font-size: 18px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.3s;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  color: var(--gray-very-light);
+  min-width: 110px;
+}
+
+button:hover {
+  transform: scale(1.07);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5);
+}
+
+/* Start */
+.start {
+  background: linear-gradient(45deg, var(--gray-light), var(--gray-very-light));
+  color: rgb(43, 45, 66);
+}
+
+/* Stop */
+.stop {
+  background: linear-gradient(45deg, var(--red-deep), var(--red-soft));
+  color: white;
+}
+
+/* Reset */
+.reset {
+  background: linear-gradient(45deg, var(--gray-very-light), white);
+  color: rgb(43, 45, 66);
+}
+
+/* ================= Responsive ================= */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .container {
+    padding: 35px 30px;
+    max-width: 90%;
+  }
+
+  #display {
+    font-size: 60px;
+    margin-bottom: 25px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 10px 22px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  body {
+    align-items: flex-start;
+    padding-top: 60px;
+  }
+
+  .container {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+
+  #display {
+    font-size: 48px;
+    letter-spacing: 2px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 15px;
+    padding: 12px;
+  }
+}

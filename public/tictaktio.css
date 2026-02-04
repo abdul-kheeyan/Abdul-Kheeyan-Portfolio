@@ -1,0 +1,126 @@
+/* RESET & BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, rgb(163, 208, 255), rgb(204, 153, 255), rgb(255, 153, 204), rgb(153, 255, 242));
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+/* CONTAINER */
+.container {
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* GAME GRID */
+.game {
+  height: 60vmin;
+  width: 60vmin;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5vmin;
+  backdrop-filter: blur(15px);
+}
+
+/* BOXES */
+.box {
+  height: 18vmin;
+  width: 18vmin;
+  border-radius: 1rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  font-size: 8vmin;
+  color: #b0413e;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+}
+
+.box:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* HEADING */
+h1 {
+  color: #fff;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* BUTTONS */
+#reset-btn,
+#new-btn {
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  background: rgba(25, 25, 25, 0.8);
+  color: #fff;
+  border-radius: 1rem;
+  border: none;
+  backdrop-filter: blur(5px);
+  transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#reset-btn:hover,
+#new-btn:hover {
+  background: rgba(25, 25, 25, 1);
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+/* MESSAGE CONTAINER */
+#msg {
+  color: #fff;
+  font-size: 5vmin;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.msg-container {
+  height: 100vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.hide {
+  display: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .game {
+    width: 80vmin;
+    height: 80vmin;
+  }
+  .box {
+    height: 24vmin;
+    width: 24vmin;
+    font-size: 10vmin;
+  }
+  #msg {
+    font-size: 4vmin;
+  }
+}

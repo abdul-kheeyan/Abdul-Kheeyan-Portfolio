@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Advanced Expense Tracker</title>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- jsPDF + AutoTable -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+   
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="Expense.css" />
+</head>
+<body>
+
+  <div class="dashboard">
+
+    <!-- ================= LEFT PANEL ================= -->
+    <div class="left-panel">
+      <h1>Expense Tracker</h1>
+
+      <!-- FORM -->
+      <form id="expense-form">
+        <input type="text" id="title" placeholder="Expense title" required />
+        <input type="number" id="amount" placeholder="Amount" required />
+
+        <select id="category">
+          <option value="Food">Food</option>
+          <option value="Travel">Travel</option>
+          <option value="Rent">Rent</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <button type="submit">Add Expense</button>
+      </form>
+
+      <!-- TOTAL -->
+      <h2>Total: ₹<span id="total">0</span></h2>
+
+      <!-- EXPORT BUTTON -->
+      <button id="exportPdfBtn" class="export-btn">
+        Export as PDF
+      </button>
+
+      <!-- EXPENSE LIST -->
+      <ul id="expense-list"></ul>
+    </div>
+
+    <!-- ================= RIGHT PANEL ================= -->
+    <div class="right-panel">
+      <h2>Categories</h2>
+
+      <!-- FILTER -->
+      <select id="filter-category">
+        <option value="all"><i class="fa-solid fa-list"></i> All Categories</option>
+        <option value="Food"><i class="fa-solid fa-utensils"></i>Food</option>
+        <option value="Travel"><i class="fa-solid fa-car"></i>Travel</option>
+        <option value="Rent"><i class="fa-solid fa-house"></i>Rent</option>
+        <option value="Shopping"><i class="fa-solid fa-bag-shopping"></i> Shopping</option>
+        <option value="Other"><i class="fa-solid fa-box"></i> Other</option>
+      </select>
+
+      <!-- CHART -->
+      <div class="chart-box">
+        <canvas id="expenseChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JS -->
+  <script src="/js/Expense.js"></script>
+</body>
+</html>

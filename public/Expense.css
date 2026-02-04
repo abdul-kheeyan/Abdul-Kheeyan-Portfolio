@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ---------------- BACKGROUND ---------------- */
+body {
+  background-image: url("image/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* ---------------- DASHBOARD ---------------- */
+.dashboard {
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 25px;
+
+  background: linear-gradient(145deg,
+      rgba(255,255,255,0.35),
+      rgba(255,255,255,0.15)
+  );
+  backdrop-filter: blur(18px);
+  padding: 28px;
+  border-radius: 22px;
+  box-shadow: 0 30px 60px rgba(8,28,21,0.35);
+}
+
+/* ---------------- PANELS ---------------- */
+.left-panel,
+.right-panel {
+  background: linear-gradient(160deg,
+      rgba(216,243,220,0.6),
+      rgba(149,213,178,0.35)
+  );
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+}
+
+.right-panel {
+  width: 100%;
+}
+
+/* ---------------- TITLES ---------------- */
+h1, h2 {
+  text-align: center;
+  color: #081C15;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+/* ---------------- FORM ---------------- */
+form {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.2fr auto;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+input, select {
+  background: linear-gradient(135deg, #D8F3DC, #B7E4C7);
+  border: 1px solid #74C69D;
+  padding: 10px 12px;
+  border-radius: 12px;
+  color: #081C15;
+  outline: none;
+  font-size: 14px;
+  transition: 0.25s;
+}
+
+input::placeholder {
+  color: #2D6A4F;
+}
+
+input:focus, select:focus {
+  border-color: #40916C;
+  box-shadow: 0 0 0 2px rgba(64,145,108,0.4);
+}
+
+/* ---------------- ADD BUTTON ---------------- */
+form button {
+  background: linear-gradient(135deg, #52B788, #2D6A4F);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(45,106,79,0.45);
+}
+
+/* ---------------- TOTAL ---------------- */
+h2 {
+  font-size: 20px;
+}
+
+#total {
+  color: #1B4332;
+  font-weight: 700;
+}
+
+/* ---------------- EXPORT BUTTON ---------------- */
+.export-btn {
+  display: block;
+  margin: 14px auto;
+  background: linear-gradient(135deg, #40916C, #1B4332);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 14px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.export-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(27,67,50,0.45);
+}
+
+/* ---------------- SCROLL LIST ---------------- */
+#expense-list {
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+#expense-list::-webkit-scrollbar {
+  width: 6px;
+}
+#expense-list::-webkit-scrollbar-thumb {
+  background: #52B788;
+  border-radius: 10px;
+}
+
+/* ---------------- LIST ITEMS ---------------- */
+li {
+  background: linear-gradient(135deg, #D8F3DC, #B7E4C7);
+  margin-bottom: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #081C15;
+  font-size: 14px;
+  transition: 0.25s;
+}
+
+li:hover {
+  transform: translateX(4px);
+  background: linear-gradient(135deg, #95D5B2, #74C69D);
+}
+
+/* ---------------- DELETE ---------------- */
+.delete {
+  background: linear-gradient(135deg, #40916C, #2D6A4F);
+  color: #fff;
+  padding: 5px 9px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.25s;
+}
+
+.delete:hover {
+  background: linear-gradient(135deg, #1B4332, #081C15);
+}
+
+/* ---------------- FILTER ---------------- */
+#filter-category {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* ---------------- CHART ---------------- */
+.chart-box {
+  background: linear-gradient(145deg, #D8F3DC, #95D5B2);
+  border-radius: 16px;
+  padding: 12px;
+  width: 100%;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  form button {
+    width: 100%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  body {
+    padding: 10px;
+    align-items: flex-start;
+  }
+
+  .dashboard {
+    padding: 18px;
+    gap: 18px;
+  }
+
+  .left-panel,
+  .right-panel {
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}

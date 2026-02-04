@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HTML & CSS Projects</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="htmlcss.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+
+<body id="body">
+  <!-- =======================
+       NAVIGATION BAR
+  ========================== -->
+  <nav>
+    <div class="container">
+      <!-- Logo -->
+      <a href="/home" class="logo">Abdul Kheeyan</a>
+
+      <!-- Hamburger Menu -->
+      <div class="menu-icon" id="menu-icon">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/home#about">About</a></li>
+        <li><a href="/home#skills">Skills</a></li>
+        <li><a href="/home#projects">Projects</a></li>
+        <li><a href="/home#contact">Contact</a></li>
+      </ul>
+
+      <!-- Theme Toggle Button -->
+      <button id="theme-toggle" class="btn theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- =======================
+       PROJECTS SECTION
+  ========================== -->
+  <h1>HTML & CSS Projects</h1>
+  <div class="projects-container">
+    <!-- Repeatable Project Cards -->
+    <div class="project-card">
+      <img src="/image/recipeimg.png" alt="Project 1" />
+      <h3>Kheeyan's kitchen</h3>
+      <p>A beautiful and responsive recipe website built using HTML and CSS..</p>
+      <a href="/recipe" class="btn" target="_blank">View Project</a>
+    </div>
+
+    <div class="project-card">
+      <img src="/image/flexmartimg.png" alt="Project 2" />
+      <h3>FlexMart</h3>
+      <p>Personal portfolio website showcasing projects and skills using CSS animations.</p>
+      <a href="/flexmart" class="btn" target="_blank">View Project</a>
+    </div>
+
+    <div class="project-card">
+      <img src="/image/pixelcarkimg.png" alt="Project 3" />
+      <h3>PixelKart</h3>
+      <p>A clean and responsive eCommerce frontend project built with HTML and CSS.
+      Designed to mimic a modern shopping site layout using Flexbox and media queries.</p>
+      <a href="/pixelkart" class="btn" target="_blank">View Project</a>
+    </div>
+
+    <div class="project-card">
+      <img src="/image/amazonimg.png" alt="Project 4" />
+      <h3>Amazon</h3>
+      <p>Sticky and responsive navigation bar built with HTML and CSS, mobile-friendly.</p>
+      <a href="/amazon" class="btn" target="_blank">View Project</a>
+    </div>
+
+    <div class="project-card">
+      <img src="/image/wandelustimg.png" alt="Project 5" />
+      <h3>Wanderlust</h3>
+      <p>A fully responsive travel booking website built using *HTML, **CSS, and *JavaScript.
+      It includes testimonial sliders, scroll animations, smooth scrolling, and functional forms</p>
+      <a href="/Wanderlust" class="btn" target="_blank">View Project</a>
+    </div>
+  </div>
+
+  <!-- =======================
+       FOOTER (Updated)
+  ========================== -->
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="https://github.com/abdul-kheeyan"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/abdul-kheeyan"><i class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/ABDUL_KHEEYAN"><i class="fab fa-twitter"></i></a>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2023 Abdul Kheeyan. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS for Theme Toggle -->
+  <script src="/js/theme-toggle.js"></script>
+</body>
+</html>

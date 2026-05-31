@@ -31,8 +31,8 @@ app.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;
 
   try {
-    // Save message to MongoDB
-    await Contact.create({ name, email, message });
+    // Save message to MongoDB (commented out — data will NOT be stored in DB)
+    // await Contact.create({ name, email, message });
 
     // Email send setup
     const transporter = nodemailer.createTransport({

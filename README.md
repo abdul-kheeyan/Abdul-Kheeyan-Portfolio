@@ -106,9 +106,15 @@ npm install
 Create a `.env` file in the root folder and add:
 
 ```env
-MONGODB_URI=your_mongodb_atlas_connection_string
-PORT=3000
+MONGO_URI=your_mongodb_atlas_connection_string
+MY_EMAIL=your_gmail@gmail.com
+APP_PASS=your_16_char_google_app_password
+PORT=8080
 ```
+
+**Render deploy:** In the Render dashboard → your Web Service → **Environment**, add the same three variables (`MONGO_URI`, `MY_EMAIL`, `APP_PASS`). The `.env` file is not uploaded to Render.
+
+**Gmail App Password:** Turn on 2-Step Verification, then create an app password at [Google App Passwords](https://myaccount.google.com/apppasswords). Use that 16-character password as `APP_PASS` (not your normal Gmail password).
 
 ### ▶ Run the Application
 

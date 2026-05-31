@@ -225,15 +225,35 @@
   <!-- =======================
        CONTACT SECTION
   ========================== -->
+
+  <!-- Toast Notification -->
+  <div id="contact-toast" style="
+    display:none;
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    z-index:9999;
+    padding:16px 24px;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:600;
+    color:#fff;
+    box-shadow:0 8px 30px rgba(0,0,0,0.25);
+    transition:opacity 0.4s ease;
+    max-width:320px;
+  "></div>
+
   <section id="contact" class="contact">
     <div class="container">
       <h2>Contact Me</h2>
-      <form action="/contact" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" rows="3" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn">Send Message</button>
-        
+      <form id="contactForm">
+        <input type="text" id="contactName" name="name" placeholder="Your Name" required />
+        <input type="email" id="contactEmail" name="email" placeholder="Your Email" required />
+        <textarea id="contactMessage" name="message" rows="3" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn" id="contactBtn">
+          <span id="btnText">Send Message</span>
+          <span id="btnSpinner" style="display:none;">⏳ Sending...</span>
+        </button>
       </form>
     </div>
   </section>
@@ -256,5 +276,63 @@
        SCRIPTS
   ========================== -->
 <script src="/js/theme-toggle.js"></script>
+<script>
+  const contactForm = document.getElementById('contactForm');
+  const contactBtn  = document.getElementById('contactBtn');
+  const btnText     = document.getElementById('btnText');
+  const btnSpinner  = document.getElementById('btnSpinner');
+  const toast       = document.getElementById('contact-toast');
+
+  function showToast(msg, success) {
+    toast.textContent = msg;
+    toast.style.background = success
+      ? 'linear-gradient(135deg,#28a745,#20c997)'
+      : 'linear-gradient(135deg,#dc3545,#c82333)';
+    toast.style.display = 'block';
+    toast.style.opacity = '1';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => { toast.style.display = 'none'; }, 400);
+    }, 4000);
+  }
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Show loading state
+    btnText.style.display    = 'none';
+    btnSpinner.style.display = 'inline';
+    contactBtn.disabled      = true;
+
+    const body = new URLSearchParams({
+      name:    document.getElementById('contactName').value,
+      email:   document.getElementById('contactEmail').value,
+      message: document.getElementById('contactMessage').value
+    });
+
+    try {
+      const res  = await fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        showToast('✅ Message sent successfully!', true);
+        contactForm.reset();
+      } else {
+        showToast('❌ ' + (data.message || 'Something went wrong.'), false);
+      }
+    } catch (err) {
+      showToast('❌ Network error. Please try again.', false);
+    } finally {
+      // Restore button
+      btnText.style.display    = 'inline';
+      btnSpinner.style.display = 'none';
+      contactBtn.disabled      = false;
+    }
+  });
+</script>
 </body>
 </html>

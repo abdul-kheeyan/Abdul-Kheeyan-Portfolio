@@ -7,6 +7,18 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 // ----------------------------
+//  NODEMAILER TRANSPORTER (created once for speed)
+// ----------------------------
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  pool: true,           // reuse connections for speed
+  auth: {
+    user: process.env.MY_EMAIL,
+    pass: process.env.APP_PASS
+  }
+});
+
+// ----------------------------
 //  VIEW ENGINE + STATIC
 // ----------------------------
 app.set("views", path.join(__dirname, "views"));
@@ -34,32 +46,27 @@ app.post("/contact", async (req, res) => {
     // Save message to MongoDB (commented out — data will NOT be stored in DB)
     // await Contact.create({ name, email, message });
 
-    // Email send setup
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.MY_EMAIL,
-        pass: process.env.APP_PASS
-      }
-    });
-
     await transporter.sendMail({
       from: process.env.MY_EMAIL,
       to: process.env.MY_EMAIL,
       subject: `New Message From Portfolio - ${name}`,
-      text: `
-        Name: ${name}
-        Email: ${email}
-        Message: ${message}
+      html: `
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color: #6c63ff;">📬 New Portfolio Message</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Message:</strong></p>
+          <p style="background:#f4f4f4;padding:12px;border-radius:6px;">${message}</p>
+        </div>
       `
     });
 
     console.log("Email sent successfully!");
-    res.redirect("/home");
+    res.json({ success: true, message: "Message sent successfully!" });
 
   } catch (error) {
     console.log("Error sending message:", error);
-    res.status(500).render("emailerror.ejs"); // <-- your error page
+    res.status(500).json({ success: false, message: "Failed to send message. Please try again." });
   }
 });
 
@@ -144,6 +151,22 @@ app.use((req, res) => {
 // =============================
 //        START SERVER
 // =============================
-app.listen(8080, () => {
-  console.log("✅ App is listening at http://localhost:8080");
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`✅ App is listening at http://localhost:${PORT}`);
+
+  // Keep Render free server alive (ping every 10 minutes)
+  if (process.env.RENDER_EXTERNAL_URL) {
+    const https = require("https");
+    const http = require("http");
+    setInterval(() => {
+      const url = process.env.RENDER_EXTERNAL_URL;
+      const client = url.startsWith("https") ? https : http;
+      client.get(url, (res) => {
+        console.log(`🏓 Keep-alive ping: ${res.statusCode}`);
+      }).on("error", (err) => {
+        console.log("Keep-alive ping error:", err.message);
+      });
+    }, 10 * 60 * 1000); // every 10 minutes
+  }
 });

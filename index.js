@@ -39,35 +39,31 @@ mongoose
 // =============================
 //      CONTACT FORM ROUTE
 // =============================
-app.post("/contact", async (req, res) => {
+app.post("/contact", (req, res) => {
   const { name, email, message } = req.body;
 
-  try {
-    // Save message to MongoDB (commented out — data will NOT be stored in DB)
-    // await Contact.create({ name, email, message });
+  // ✅ INSTANT response to user — no waiting!
+  res.json({ success: true, message: "Message sent successfully!" });
 
-    await transporter.sendMail({
-      from: process.env.MY_EMAIL,
-      to: process.env.MY_EMAIL,
-      subject: `New Message From Portfolio - ${name}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px;">
-          <h2 style="color: #6c63ff;">📬 New Portfolio Message</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p style="background:#f4f4f4;padding:12px;border-radius:6px;">${message}</p>
-        </div>
-      `
-    });
-
-    console.log("Email sent successfully!");
-    res.json({ success: true, message: "Message sent successfully!" });
-
-  } catch (error) {
-    console.log("Error sending message:", error);
-    res.status(500).json({ success: false, message: "Failed to send message. Please try again." });
-  }
+  // 📧 Send email in BACKGROUND (fire & forget)
+  transporter.sendMail({
+    from: process.env.MY_EMAIL,
+    to: process.env.MY_EMAIL,
+    subject: `New Message From Portfolio - ${name}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; padding: 20px;">
+        <h2 style="color: #6c63ff;">📬 New Portfolio Message</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
+        <p style="background:#f4f4f4;padding:12px;border-radius:6px;">${message}</p>
+      </div>
+    `
+  }).then(() => {
+    console.log(`✅ Email sent for: ${name} <${email}>`);
+  }).catch((err) => {
+    console.error("❌ Email send error:", err.message);
+  });
 });
 
 

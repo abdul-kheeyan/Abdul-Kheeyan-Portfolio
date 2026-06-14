@@ -2,53 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
-const Contact = require("./models/contactModel");
-const nodemailer = require("nodemailer");
 require("dotenv").config();
-
-// ----------------------------
-//  NODEMAILER (Gmail SMTP — works on Render)
-// ----------------------------
-function escapeHtml(str = "") {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-const emailConfigured =
-  Boolean(process.env.MY_EMAIL) && Boolean(process.env.APP_PASS);
-
-const transporter = emailConfigured
-  ? nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
-      pool: true,
-      auth: {
-        user: process.env.MY_EMAIL,
-        pass: process.env.APP_PASS
-      }
-    })
-  : null;
-
-if (!emailConfigured) {
-  console.error(
-    "❌ Email not configured: set MY_EMAIL and APP_PASS in Render Environment (or .env locally)."
-  );
-} else {
-  transporter.verify((err) => {
-    if (err) {
-      console.error("❌ Gmail SMTP verify failed:", err.message);
-      console.error(
-        "   Use a Google App Password (not your normal password). Enable 2FA, then create one at: https://myaccount.google.com/apppasswords"
-      );
-    } else {
-      console.log("✅ Gmail SMTP ready:", process.env.MY_EMAIL);
-    }
-  });
-}
 
 // ----------------------------
 //  VIEW ENGINE + STATIC
@@ -69,66 +23,12 @@ mongoose
 
 
 // =============================
-//      CONTACT FORM ROUTE
-// =============================
-app.post("/contact", async (req, res) => {
-  const { name, email, message } = req.body;
-
-  if (!name?.trim() || !email?.trim() || !message?.trim()) {
-    return res.status(400).json({
-      success: false,
-      message: "Please fill in name, email, and message."
-    });
-  }
-
-  if (!emailConfigured || !transporter) {
-    return res.status(503).json({
-      success: false,
-      message: "Email service is not configured on the server. Please try again later."
-    });
-  }
-
-  try {
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.MY_EMAIL}>`,
-      to: process.env.MY_EMAIL,
-      replyTo: email,
-      subject: `New Message From Portfolio - ${name}`,
-      html: `
-      <div style="font-family: Arial, sans-serif; padding: 20px;">
-        <h2 style="color: #6c63ff;">📬 New Portfolio Message</h2>
-        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Message:</strong></p>
-        <p style="background:#f4f4f4;padding:12px;border-radius:6px;">${escapeHtml(message)}</p>
-      </div>
-    `
-    });
-
-    Contact.create({ name, email, message }).catch((err) => {
-      console.error("MongoDB backup save failed:", err.message);
-    });
-
-    console.log(`✅ Email sent for: ${name} <${email}>`);
-    res.json({ success: true, message: "Message sent successfully!" });
-  } catch (err) {
-    console.error("❌ Email send error:", err.message);
-    res.status(500).json({
-      success: false,
-      message:
-        "Could not send email. Check server logs on Render (Gmail App Password / env vars)."
-    });
-  }
-});
-
-
-// =============================
 //           ROUTES
 // =============================
 
 // Home Page
 app.get("/home", (req, res) => {
-  res.render("home.ejs");
+  res.render("home.ejs", { contactEmail: process.env.MY_EMAIL });
 });
 
 // HTML CSS Projects

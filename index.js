@@ -45,6 +45,7 @@ app.get("/neomart", (req, res) => res.render("neomart.ejs"));
 app.get("/wanderlust", (req, res) => res.render("wanderlust.ejs"));
 app.get("/resume", (req, res) => res.render("resume"));
 app.get("/Expense", (req,res)=> res.render("Expense"))
+app.get("/NewsHub", (req,res)=> res.render("newshub.ejs"))
 
 // MERN Stack – Postverse
 let posts = [];

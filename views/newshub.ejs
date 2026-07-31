@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsHub - Stay Informed</title>
+    <link rel="stylesheet" href="newshub.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="navigateTo('home')">NewsHub</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" class="nav-link active" onclick="navigateTo('home')" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" onclick="navigateTo('category', 'Technology')" data-page="category">Categories</a></li>
+                <li><a href="#" class="nav-link" onclick="navigateTo('about')" data-page="about">About</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="homePage" class="page active">
+        <section class="hero">
+            <div class="hero-container">
+                <h1>Welcome to NewsHub</h1>
+                <p>Your trusted source for the latest news and stories from around the world</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <h2 class="section-title">Latest News</h2>
+            <div class="news-grid" id="homeNewsGrid"></div>
+        </div>
+    </div>
+
+    <!-- Category Page -->
+    <div id="categoryPage" class="page">
+        <section class="hero">
+            <div class="hero-container">
+                <h1 id="categoryTitle">All Categories</h1>
+                <p>Explore news by category</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="category-filter" id="categoryFilter"></div>
+            <div class="news-grid" id="categoryNewsGrid"></div>
+        </div>
+    </div>
+
+    <!-- Article Page -->
+    <div id="articlePage" class="page">
+        <div class="article-container" id="articleContent"></div>
+    </div>
+
+    <!-- About Page -->
+    <div id="aboutPage" class="page">
+        <section class="hero">
+            <div class="hero-container">
+                <h1>About NewsHub</h1>
+                <p>Our mission and vision</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="about-section">
+                <h2>Our Mission</h2>
+                <p>At NewsHub, we are committed to delivering accurate, unbiased, and timely news to our readers. We believe that an informed society is a stronger society, and we strive to provide comprehensive coverage of events that matter most to you.</p>
+                <p>Our team of dedicated journalists works around the clock to bring you stories from across the globe, covering everything from breaking news to in-depth analysis of current events.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>Our Vision</h2>
+                <p>We envision a world where quality journalism is accessible to everyone. Our goal is to create a platform that not only informs but also inspires meaningful conversations and promotes understanding across diverse communities.</p>
+                <p>Through innovative storytelling and cutting-edge technology, we aim to set new standards in digital journalism while maintaining the highest ethical standards.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>What We Cover</h2>
+                <p>Our comprehensive coverage spans multiple categories including Technology, Business, Sports, Health, Entertainment, and Politics. We believe in providing diverse perspectives and ensuring that all voices are heard.</p>
+                <p>Whether you're looking for the latest tech innovations, business insights, sports highlights, or health tips, NewsHub has you covered with expert analysis and engaging storytelling.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>NewsHub</h3>
+                <p>Your trusted source for news and information from around the world.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <a href="#" onclick="navigateTo('category', 'Technology')">Technology</a>
+                <a href="#" onclick="navigateTo('category', 'Business')">Business</a>
+                <a href="#" onclick="navigateTo('category', 'Sports')">Sports</a>
+                <a href="#" onclick="navigateTo('category', 'Health')">Health</a>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#" onclick="navigateTo('home')">Home</a>
+                <a href="#" onclick="navigateTo('about')">About Us</a>
+                <a href="#" onclick="navigateTo('category')">Categories</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: abdulkheeuan@gmail.com</p>
+                <p>Phone: +91 9527864410</p>
+                <p>45, Media Nagar, Andheri East, Mumbai, Maharashtra – 400069</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 NewsHub. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="/js/newshub.js"></script>
+</body>
+</html>

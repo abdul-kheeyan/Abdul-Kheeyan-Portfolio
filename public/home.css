@@ -863,4 +863,18 @@ footer .social-links a:hover {
   }
 }
 
+/* ===================== LIGHT MODE CONTACT EMAIL ===================== */
+.light-mode .contact-note {
+  color: #555;
+}
+
+.light-mode .contact-note a {
+  color: #1e90ff;   /* Blue in light mode */
+}
+
+.light-mode .contact-note a:hover {
+  color: #0077cc;
+  text-decoration: underline;
+}
+
 

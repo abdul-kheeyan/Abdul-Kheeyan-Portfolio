@@ -51,6 +51,17 @@ app.get("/resume", (req, res) => res.render("resume"));
 app.get("/Expense", (req,res)=> res.render("Expense"))
 app.get("/NewsHub", (req,res)=> res.render("newshub.ejs"))
 
+// Resume Download Route
+app.get("/download-resume", (req, res) => {
+  const filePath = path.join(__dirname, "public", "image", "Abdul_kheeyan.pdf");
+  res.download(filePath, "Abdul_Kheeyan_Resume.pdf", (err) => {
+    if (err) {
+      console.error("Resume download error:", err);
+      res.status(404).send("Resume not found");
+    }
+  });
+});
+
 // MERN Stack – Postverse
 let posts = [];
 

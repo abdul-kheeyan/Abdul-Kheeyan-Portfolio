@@ -277,7 +277,39 @@ function initSortables(){
 initSortables();
 
 /* ---------- export PDF & HTML & JSON ---------- */
-exportPDF.addEventListener('click', ()=>{
+exportPDF.addEventListener('click', () => {
+  try {
+    // Hide the top bar during export
+    document.querySelector('.topbar').style.visibility = 'hidden';
+    const opt = {
+      margin: 10,
+      filename: (state.name || 'resume') + '.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    // Small delay to let UI update
+    setTimeout(() => {
+      html2pdf()
+        .set(opt)
+        .from(document.querySelector('.panel.preview-panel'))
+        .save()
+        .then(() => {
+          // Success – restore top bar
+          document.querySelector('.topbar').style.visibility = 'visible';
+        })
+        .catch(err => {
+          console.error('PDF export error:', err);
+          alert('Failed to export PDF. See console for details.');
+          document.querySelector('.topbar').style.visibility = 'visible';
+        });
+    }, 120);
+  } catch (e) {
+    console.error('Export PDF click error:', e);
+    alert('Error initiating PDF export. See console for details.');
+    document.querySelector('.topbar').style.visibility = 'visible';
+  }
+});
   document.querySelector('.topbar').style.visibility='hidden';
   const opt = { margin:10, filename:(state.name||'resume')+'.pdf', image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2,useCORS:true}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'} };
   setTimeout(()=>{ html2pdf().set(opt).from(document.querySelector('.panel.preview-panel')).save().finally(()=>{ document.querySelector('.topbar').style.visibility='visible'; }); },120);

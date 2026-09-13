@@ -53,7 +53,7 @@ app.get("/NewsHub", (req,res)=> res.render("newshub.ejs"))
 
 // Resume Download Route
 app.get("/download-resume", (req, res) => {
-  const filePath = path.join(__dirname, "public", "image", "Abdul_kheeyan.pdf");
+  const filePath = path.join(__dirname, "public", "image", "Abdul_Kheeyan.pdf");
   res.download(filePath, "Abdul_Kheeyan_Resume.pdf", (err) => {
     if (err) {
       console.error("Resume download error:", err);

@@ -115,12 +115,16 @@ app.get("/mern-projects", (req, res) => res.render("mern-projects.ejs"));
 // =============================
 app.post("/api/chat", async (req, res) => {
   try {
-    const { message } = req.body;
-    if (!message) return res.status(400).json({ error: "Message required" });
+    const { message, history } = req.body || {};
+    const normalizedMessage = typeof message === "string" ? message.trim() : "";
+    if (!normalizedMessage) return res.status(400).json({ error: "Message required" });
+    if (normalizedMessage.length > 500) {
+      return res.status(400).json({ error: "Message must be 500 characters or less" });
+    }
 
     // Local fallback responder in case API fails or has quota issues
     const getLocalResponse = (msgText) => {
-      const msg = msgText.toLowerCase();
+      const msg = msgText.toLowerCase().trim();
 
       // Why Hire / Reasons to hire
       if (msg.includes("hire") || msg.includes("why select") || msg.includes("should i hire")) {
@@ -137,8 +141,13 @@ app.post("/api/chat", async (req, res) => {
         return "Abdul Kheeyan is a Full Stack MERN Developer specializing in building production-grade, AI-integrated web applications.\n\n• Tech Stack: React.js, Node.js, Express.js, MongoDB, WebRTC, Socket.io, Google Gemini API.\n• Projects: MediAI Pro (Healthcare AI Platform) & CodeVault (AI Code Review Tool).\n• Experience: Web Development Intern at Technical One (6 months, remote).";
       }
 
+      // LeetCode / coding profile
+      if (msg.includes("leetcode") || msg.includes("coding profile") || msg.includes("coding practice") || msg.includes("dsa") || msg.includes("algorithm")) {
+        return "Abdul Kheeyan ka LeetCode profile:\n\n💻 https://leetcode.com/u/abdul_kheeyan/\n\nYahan aap uski coding practice, solved problems aur algorithmic problem-solving progress dekh sakte hain.";
+      }
+
       // Skills / Tech
-      if (msg.includes("skill") || msg.includes("technolog") || msg.includes("languages") || msg.includes("frontend") || msg.includes("backend") || msg.includes("code") || msg.includes("stack")) {
+      if (msg.includes("skill") || msg.includes("technolog") || msg.includes("languages") || msg.includes("frontend") || msg.includes("backend") || msg.includes("code") || msg.includes("stack") || msg.includes("kaun si technology") || msg.includes("kya aata hai")) {
         return "Abdul Kheeyan's Technical Skills:\n\n• Languages: JavaScript (ES6+), HTML5, CSS3, C++\n• Frontend: React.js (v19), Vite, Tailwind CSS, Framer Motion, Material UI\n• Backend: Node.js, Express.js, REST APIs, Socket.io, WebRTC\n• Database: MongoDB, Mongoose ODM, MySQL\n• AI & APIs: Google Gemini API, GitHub API, LLM Integration\n• Tools: Git, GitHub, Postman, Vercel, Render, CI/CD";
       }
 
@@ -158,8 +167,8 @@ app.post("/api/chat", async (req, res) => {
       }
 
       // Contact
-      if (msg.includes("contact") || msg.includes("email") || msg.includes("phone") || msg.includes("reach") || msg.includes("address") || msg.includes("linkedin") || msg.includes("github")) {
-        return "Contact Abdul Kheeyan:\n\n📧 Email: abdulkheeyan@gmail.com\n📱 Phone: +91 9527864410\n🔗 LinkedIn: linkedin.com/in/abdul-kheeyan\n🐙 GitHub: github.com/abdul-kheeyan";
+      if (msg.includes("contact") || msg.includes("email") || msg.includes("phone") || msg.includes("reach") || msg.includes("address") || msg.includes("linkedin") || msg.includes("github") || msg.includes("kaise contact")) {
+        return "Contact Abdul Kheeyan:\n\n📧 Email: abdulkheeyan@gmail.com\n📱 Phone: +91 9527864410\n🔗 LinkedIn: https://www.linkedin.com/in/abdul-kheeyan\n🐙 GitHub: https://github.com/abdul-kheeyan\n💻 LeetCode: https://leetcode.com/u/abdul_kheeyan/";
       }
 
       // Resume
@@ -168,7 +177,7 @@ app.post("/api/chat", async (req, res) => {
       }
 
       // Greetings (ONLY match explicit greetings!)
-      if (msg.includes("hello") || msg.includes("hi") || msg.includes("hey") || msg.includes("greetings") || msg.includes("namaste")) {
+      if (/^(hello|hi|hey|greetings|namaste|हेलो|नमस्ते)(\s|$)/i.test(msg)) {
         return "Hello! I am KHEEYAN, Abdul Kheeyan's portfolio assistant. How can I help you today? You can ask about his skills, projects, experience, education, why to hire him, or contact info!";
       }
 
@@ -232,15 +241,26 @@ CONTACT:
 - LinkedIn: linkedin.com/in/abdul-kheeyan
 - GitHub: github.com/abdul-kheeyan
 - Twitter/X: x.com/ABDUL_KHEEYAN
+- LeetCode: https://leetcode.com/u/abdul_kheeyan/
 
-Keep responses concise, clear, and recruiter-friendly. Use bullet points when listing items.`;
+Keep responses concise, clear, and recruiter-friendly. Use bullet points when listing items. You can understand and reply in English, Hindi, or Hinglish. Match the user's language when practical. Only discuss Abdul Kheeyan and his portfolio. When mentioning a profile, use the complete URL.\n\nRecent conversation context will be provided below when available.`;
 
-      const result = await model.generateContent(systemPrompt + "\n\nUser question: " + message);
+      const safeHistory = Array.isArray(history)
+        ? history
+            .filter(item => item && (item.role === "user" || item.role === "assistant") && typeof item.content === "string")
+            .slice(-6)
+            .map(item => `${item.role}: ${item.content.slice(0, 800)}`)
+        : [];
+      const conversationContext = safeHistory.length
+        ? `\n\nRecent conversation:\n${safeHistory.join("\n")}`
+        : "";
+
+      const result = await model.generateContent(systemPrompt + conversationContext + "\n\nUser question: " + normalizedMessage);
       const reply = result.response.text();
       res.json({ reply });
     } catch (apiErr) {
       console.warn("Gemini API call failed, using local fallback. Error details:", apiErr.message);
-      const reply = getLocalResponse(message);
+      const reply = getLocalResponse(normalizedMessage);
       res.json({ reply });
     }
   } catch (err) {

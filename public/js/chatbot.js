@@ -19,6 +19,22 @@
 
   let isOpen      = false;
   let isFirstOpen = true;
+  let conversationHistory = [];
+
+  function formatBotText(text) {
+    var escapedText = String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+
+    return escapedText.replace(/(https?:\/\/[^\s<]+)/g, function (url) {
+      var trailing = url.match(/[.,!?)]*$/)[0];
+      var cleanUrl = trailing ? url.slice(0, -trailing.length) : url;
+      return '<a href="' + cleanUrl + '" target="_blank" rel="noopener noreferrer">' + cleanUrl + '</a>' + trailing;
+    });
+  }
 
   // ─── TOGGLE CHAT WINDOW ───
   function toggleChat() {
@@ -99,6 +115,7 @@
         setTimeout(typeCharacter, speed);
       } else {
         // Typing finished
+        textEl.innerHTML = formatBotText(text);
         setInputsDisabled(false);
 
         // Append follow-up buttons if provided
@@ -151,6 +168,14 @@
     // Show what the user clicked
     addUserMessage(btn.label);
 
+    if (btn.url) {
+      window.open(btn.url, '_blank', 'noopener,noreferrer');
+      addBotMessage('LeetCode profile open kar diya: ' + btn.url, [
+        { label: "<i class='fas fa-home'></i> Main Menu", key: 'greeting' }
+      ]);
+      return;
+    }
+
     if (btn.key === 'greeting') {
       // Show main menu again
       var greeting = CHATBOT_DATA.greeting;
@@ -183,18 +208,23 @@
       var response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: message })
+        body: JSON.stringify({ message: message, history: conversationHistory.slice(-6) })
       });
 
       var data = await response.json();
       hideTyping();
 
       if (data.reply) {
+        conversationHistory.push({ role: 'user', content: message });
+        conversationHistory.push({ role: 'assistant', content: data.reply });
+        conversationHistory = conversationHistory.slice(-8);
+
         // Show API answer with follow-up buttons
         addBotMessage(data.reply, [
           { label: "<i class='fas fa-tools'></i> Technical Skills", key: 'skills' },
           { label: "<i class='fas fa-laptop-code'></i> Projects", key: 'projects' },
           { label: "<i class='fas fa-address-book'></i> Contact", key: 'contact' },
+          { label: "<i class='fas fa-code'></i> LeetCode", key: 'leetcode' },
           { label: "<i class='fas fa-home'></i> Main Menu", key: 'greeting' }
         ]);
       } else {

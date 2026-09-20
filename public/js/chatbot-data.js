@@ -14,7 +14,8 @@ const CHATBOT_DATA = {
       { label: "<i class='fas fa-laptop-code'></i> Projects", key: "projects" },
       { label: "<i class='fas fa-briefcase'></i> Experience", key: "experience" },
       { label: "<i class='fas fa-graduation-cap'></i> Education", key: "education" },
-      { label: "<i class='fas fa-address-book'></i> Contact", key: "contact" }
+      { label: "<i class='fas fa-address-book'></i> Contact", key: "contact" },
+      { label: "<i class='fas fa-code'></i> LeetCode", key: "leetcode" }
     ]
   },
 
@@ -178,9 +179,19 @@ const CHATBOT_DATA = {
       ]
     },
 
+    // ── LEETCODE ──
+    leetcode: {
+      text: "Abdul Kheeyan ka LeetCode profile:\n\n• Profile: https://leetcode.com/u/abdul_kheeyan/\n• Yahan aap uske coding practice, solved problems aur algorithmic problem-solving progress dekh sakte hain.\n\nCoding profile open karne ke liye neeche button click karein:",
+      buttons: [
+        { label: "<i class='fas fa-external-link-alt'></i> Open LeetCode", key: "open_leetcode", url: "https://leetcode.com/u/abdul_kheeyan/" },
+        { label: "<i class='fas fa-tools'></i> Skills", key: "skills" },
+        { label: "<i class='fas fa-home'></i> Main Menu", key: "greeting" }
+      ]
+    },
+
     // ── CONTACT ──
     contact: {
-      text: "Contact Abdul Kheeyan:\n\n📧 Email: abdulkheeyan@gmail.com\n📱 Phone: +91 9527864410\n🔗 LinkedIn: linkedin.com/in/abdul-kheeyan\n🐙 GitHub: github.com/abdul-kheeyan\n🐦 Twitter/X: x.com/ABDUL_KHEEYAN\n\nFeel free to reach out for collaborations, job opportunities, or just to say hi!",
+      text: "Contact Abdul Kheeyan:\n\n📧 Email: abdulkheeyan@gmail.com\n📱 Phone: +91 9527864410\n🔗 LinkedIn: https://www.linkedin.com/in/abdul-kheeyan\n🐙 GitHub: https://github.com/abdul-kheeyan\n🐦 Twitter/X: https://x.com/ABDUL_KHEEYAN\n💻 LeetCode: https://leetcode.com/u/abdul_kheeyan/\n\nFeel free to reach out for collaborations, job opportunities, or just to say hi!",
       buttons: [
         { label: "<i class='fas fa-user-tie'></i> About Me", key: "about" },
         { label: "<i class='fas fa-laptop-code'></i> Projects", key: "projects" },

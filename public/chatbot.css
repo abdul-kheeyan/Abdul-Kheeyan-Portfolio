@@ -242,6 +242,20 @@
   white-space: pre-wrap;
 }
 
+.chatbot-msg .msg-text a {
+  color: #74b9ff;
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+
+.chatbot-msg.user .msg-text a {
+  color: #ffffff;
+}
+
+.chatbot-msg .msg-text a:hover {
+  color: #a8d8ff;
+}
+
 /* ===================================
    CHATBOT — QUICK-REPLY BUTTONS
    Styled as pill buttons with accent border
@@ -411,6 +425,10 @@
 .light-mode .chatbot-msg.bot {
   background-color: #f5f5f5;
   color: #111;
+}
+
+.light-mode .chatbot-msg.bot .msg-text a {
+  color: #1671c8;
 }
 
 /* User message — matches light-mode .btn gradient */

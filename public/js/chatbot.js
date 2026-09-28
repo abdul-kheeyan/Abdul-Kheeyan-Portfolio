@@ -221,9 +221,9 @@
 
         // Show API answer with follow-up buttons
         addBotMessage(data.reply, [
-          { label: "<i class='fas fa-tools'></i> Technical Skills", key: 'skills' },
+          { label: "<i class='fas fa-tools'></i> Skills", key: 'skills' },
           { label: "<i class='fas fa-laptop-code'></i> Projects", key: 'projects' },
-          { label: "<i class='fas fa-address-book'></i> Contact", key: 'contact' },
+          { label: "<i class='fas fa-briefcase'></i> Experience", key: 'experience' },
           { label: "<i class='fas fa-code'></i> LeetCode", key: 'leetcode' },
           { label: "<i class='fas fa-home'></i> Main Menu", key: 'greeting' }
         ]);
